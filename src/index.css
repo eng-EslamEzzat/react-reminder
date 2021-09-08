@@ -10,6 +10,12 @@ body {
   box-shadow: 1px 2px 5px #000;
 }
 
+/* @media (min-width: 1900px) {
+  .container {
+    max-width: 1800px;
+  }
+} */
+
 .container img {
   width: 20%;
   display: block;

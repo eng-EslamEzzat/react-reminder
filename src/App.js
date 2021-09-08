@@ -24,7 +24,7 @@ function App(props) {
  )
   return (
     <>
-      <Container>
+      <Container >
         <Image
           src={logo} />
         <div className="title"><h1>react reminder</h1></div>
