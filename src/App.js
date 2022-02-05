@@ -17,9 +17,9 @@ function App(props) {
     props.reminders.map((reminder,index)=>(
       <ListGroup.Item key={index}>
         <div>{reminder.text}</div>
-        <div>{moment(new Date(reminder.date)).fromNow()}</div>
+        <div style={{color: 'gray'}}>{moment(new Date(reminder.date)).fromNow()}</div>
         <Button variant="danger"  className="delete-btn" onClick={()=>props.removeReminder(reminder.text,reminder.date)}>Delete</Button>
-        </ListGroup.Item>
+      </ListGroup.Item>
     ))
  )
   return (
