@@ -7,6 +7,8 @@ import moment from 'moment';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import logo from './logo.svg'
+import {TransitionGroup, CSSTransition} from 'react-transition-group';
+
 
 
 function App(props) {
@@ -15,11 +17,13 @@ function App(props) {
 
  const renderReminders = ()=>(
     props.reminders.map((reminder,index)=>(
-      <ListGroup.Item key={index}>
+      <CSSTransition key={reminder.text||reminder.date} timeout={700} classNames="item">
+      <ListGroup.Item>
         <div>{reminder.text}</div>
         <div style={{color: 'gray'}}>{moment(new Date(reminder.date)).fromNow()}</div>
         <Button variant="danger"  className="delete-btn" onClick={()=>props.removeReminder(reminder.text,reminder.date)}>Delete</Button>
       </ListGroup.Item>
+      </CSSTransition>
     ))
  )
   return (
@@ -43,9 +47,11 @@ function App(props) {
             timeCaption="time"
           />
           <Button onClick={()=>{text&&props.addReminder(text,date);setText("")}}  variant="success" block>Add Reminder</Button>
-          <ListGroup>
+          <TransitionGroup className="list-group">
+          {/* <ListGroup> */}
           {renderReminders()}
-          </ListGroup>
+          {/* </ListGroup> */}
+          </TransitionGroup>
           <Button onClick={()=>props.clearReminder()} variant="danger" block>Clear Reminder</Button>
         </Form>
       </Container>

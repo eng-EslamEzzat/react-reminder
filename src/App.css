@@ -11,3 +11,7 @@
   height: 40vmin;
   pointer-events: none;
 }
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 700ms ease-out;
+}
