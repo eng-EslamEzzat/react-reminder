@@ -6,16 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux'
-import reducer from './reducer'
+import reducer from './redux/reducer'
 
 const store = createStore(reducer);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
+  <Provider store={store}>
     <App />
-    </Provider>
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
