@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, ListGroup } from 'react-bootstrap';
 import {CSSTransition} from 'react-transition-group';
 import moment from 'moment';
-import {removeReminder} from '../../redux/actions';
+import {removeReminder, addAlarm, showAlert} from '../../redux/actions';
 import { connect } from 'react-redux';
 
 
@@ -12,6 +12,10 @@ const ReminderItem = (props) => {
 
   const updateDate = () => {
     const updatedDate = moment(new Date(reminder.date)).fromNow();
+    if(updatedDate === "a few seconds ago"){
+      props.addAlarm(reminder.text)
+      props.showAlert()
+    }
     setDate(updatedDate)
   }
 
@@ -28,8 +32,13 @@ const ReminderItem = (props) => {
   )
 }
 
+const mapStateToProps = (state) => ({
+  show: state.show
+})
 const mapDispatchToProps = {
-  removeReminder
+  removeReminder,
+  addAlarm,
+  showAlert
 }
 
-export default connect(null, mapDispatchToProps)(ReminderItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ReminderItem);
