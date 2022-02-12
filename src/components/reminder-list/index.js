@@ -10,7 +10,7 @@ const ReminderList = (props) => {
         {
             props.reminders.map((reminder)=>(
                 <CSSTransition key={ reminder.id} timeout={700} classNames="item">
-                    <ReminderItem reminder={reminder}/>
+                    {reminder&&<ReminderItem reminder={reminder}/>}
                 </CSSTransition>
             ))
         }

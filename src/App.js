@@ -13,7 +13,7 @@ function App(props) {
     <Container >
       <Image
         src={logo} />
-      <div className="title"><h1>react reminder</h1></div>
+      <div className="title"><h1>esez reminder</h1></div>
       <ReminderForm />
       <ReminderList />
       <Button onClick={()=>props.clearReminder()} variant="danger" block>Clear Reminder</Button>

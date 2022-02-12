@@ -26,7 +26,8 @@ const ReminderForm = (props) => {
                 props.showAlert()
             } 
         });
-        (text&&unique)&&props.addReminder(text,date); setText("")
+        date.setSeconds(0);
+        (text&&unique)&& props.addReminder(text,date); setText("");
     }
     
     return (
@@ -38,7 +39,7 @@ const ReminderForm = (props) => {
                 selected={date}
                 value={date}
                 placeholderText="Enter the Date"
-                onChange={d=>setDate(d)}
+                onChange={(d)=>setDate(d)}
                 showTimeSelect
                 timeFormat="HH:mm"
                 dateFormat="MMMM d, yyyy h:mm aa"

@@ -18,7 +18,7 @@ export default (state = initState, action) => {
             return { ...state, reminders:reminders }
             
         case REMOVE_REMINDER:
-            reminders = state.reminders.filter(reminder=>!(reminder.text===action.text&&reminder.date===action.date))
+            reminders = state.reminders.filter(reminder=>!(reminder.id===action.id))
             bake_cookie('reminders',reminders)
             return { ...state, reminders:reminders }
         

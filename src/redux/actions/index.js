@@ -8,11 +8,10 @@ export const addReminder = (text,date) => (
     }
 )
 
-export const removeReminder = (text,date) => (
+export const removeReminder = (id) => (
     {
         type:REMOVE_REMINDER,
-        text,
-        date
+        id
     }
 )
 

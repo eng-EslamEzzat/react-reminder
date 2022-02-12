@@ -7,33 +7,39 @@ import { connect } from 'react-redux';
 
 
 const ReminderItem = (props) => {
-  const {reminder} = props;
+  // const {reminder} = props;
+  // const [reminder] = props.reminders.filter(reminder => reminder.id === props.reminder.id)
+  const [reminder] = useState(props.reminder)
   const [date, setDate] = useState(moment(new Date(reminder.date)).fromNow())
 
+  let reminderDate = new Date(reminder.date)
   const updateDate = () => {
-    const updatedDate = moment(new Date(reminder.date)).fromNow();
-    if(updatedDate === "a few seconds ago"){
+    const updatedDate = new Date();
+    updatedDate.setSeconds(0);
+    if(updatedDate.toString() === reminderDate.toString()) {
       props.addAlarm(reminder.text)
       props.showAlert()
+      reminderDate = 0;
     }
-    setDate(updatedDate)
+    setDate(moment(new Date(reminder.date)).fromNow())
   }
 
-  setInterval(updateDate, 40000 );
+  setInterval(updateDate, 1000 );
 
   return (
     <CSSTransition key={reminder.id} timeout={700} classNames="item">
       <ListGroup.Item>
           <div>{reminder.text}</div>
           <div style={{color: 'gray'}}>{date}</div>
-          <Button variant="danger" className="delete-btn" onClick={()=>props.removeReminder(reminder.text,reminder.date)}>Delete</Button>
+          <Button variant="danger" className="delete-btn" onClick={()=>props.removeReminder(reminder.id)}>Delete</Button>
       </ListGroup.Item>
     </CSSTransition>
   )
 }
 
 const mapStateToProps = (state) => ({
-  show: state.show
+  show: state.show,
+  reminders: state.reminders
 })
 const mapDispatchToProps = {
   removeReminder,
