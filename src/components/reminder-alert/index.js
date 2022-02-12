@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import {showAlert, hideAlert, removeAlarm} from '../../redux/actions';
-const audio = new Audio('https://assets.mixkit.co/sfx/download/mixkit-classic-alarm-995.wav');
-audio.loop = true;
 
 const ReminderAlert = (props) => {
+    const [audio] = useState(new Audio('https://assets.mixkit.co/sfx/download/mixkit-classic-alarm-995.wav'));
+    audio.loop = true;
 
     const {show, hideAlert, alarm, removeAlarm} = props;
     alarm&& audio.play();
+    
     return (
         <Modal show={show} onHide={() => {hideAlert(); alarm&&removeAlarm(); audio.pause()}}>
             <Modal.Header closeButton>
