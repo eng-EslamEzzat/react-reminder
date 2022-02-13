@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { connect } from 'react-redux';
-import {showAlert, hideAlert, removeAlarm} from '../../redux/actions';
+import {showAlert, hideAlert, removeAlarm, deadAlarm} from '../../redux/actions';
 
 const ReminderAlert = (props) => {
     const [audio] = useState(new Audio('https://assets.mixkit.co/sfx/download/mixkit-classic-alarm-995.wav'));
     audio.loop = true;
 
-    const {show, hideAlert, alarm, removeAlarm} = props;
-    show&& audio.play();
+    const {show, hideAlert, alarm, removeAlarm, dAlarm, deadAlarm} = props;
+    (alarm&&dAlarm)&& audio.play();
     
     return (
-        <Modal show={show} onHide={() => {hideAlert(); alarm&&removeAlarm(); audio.pause()}}>
+        <Modal show={show&&dAlarm} onHide={() => {hideAlert(); alarm&&removeAlarm(); audio.pause(); deadAlarm()}}>
             <Modal.Header closeButton>
-            <Modal.Title>{show? "Alarm...": "Warning..."}</Modal.Title>
+            <Modal.Title>{alarm&&dAlarm? "Alarm...": "Warning..."}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{show? alarm: "Seems you are already added this!"}</Modal.Body>
+            <Modal.Body>{alarm&&dAlarm? alarm: "Seems you are already added this!"}</Modal.Body>
             <Modal.Footer>
-            <Button variant="secondary" onClick={() => {hideAlert(); alarm&&removeAlarm(); audio.pause()}}>
+            <Button variant="secondary" onClick={() => {hideAlert(); alarm&&removeAlarm(); audio.pause(); deadAlarm()}}>
                 Close
             </Button>
             </Modal.Footer>
@@ -27,12 +27,14 @@ const ReminderAlert = (props) => {
 
 const mapStateToProps = (state) => ({
     show: state.alertModel,
-    alarm: state.alarm
+    alarm: state.alarm,
+    dAlarm: state.dAlarm,
 })
 
 const mapDispatchToProps = {
     showAlert,
     hideAlert,
-    removeAlarm
+    removeAlarm,
+    deadAlarm
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ReminderAlert);

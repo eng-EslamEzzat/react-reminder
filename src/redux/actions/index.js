@@ -1,4 +1,4 @@
-import {ADD_REMINDER, CLEAR_REMINDER, REMOVE_REMINDER, SHOW_ALERT, HIDE_ALERT, ADD_ALARM, REMOVE_ALARM} from '../types';
+import {ADD_REMINDER, CLEAR_REMINDER, REMOVE_REMINDER, SHOW_ALERT, HIDE_ALERT, ADD_ALARM, REMOVE_ALARM, DEAD_ALARM} from '../types';
 
 export const addReminder = (text,date) => (
     {
@@ -43,5 +43,11 @@ export const addAlarm = (text) => (
 export const removeAlarm = () => (
     {
         type:REMOVE_ALARM,
+    }
+)
+
+export const deadAlarm = () => (
+    {
+        type:DEAD_ALARM,
     }
 )

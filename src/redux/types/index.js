@@ -5,3 +5,4 @@ export const SHOW_ALERT = 'SHOW_ALERT';
 export const HIDE_ALERT = 'HIDE_ALERT';
 export const ADD_ALARM = 'ADD_ALARM';
 export const REMOVE_ALARM = 'REMOVE_ALARM';
+export const DEAD_ALARM = 'DEAD_ALARM';

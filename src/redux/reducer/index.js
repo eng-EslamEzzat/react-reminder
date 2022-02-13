@@ -1,11 +1,12 @@
-import {ADD_ALARM, ADD_REMINDER, CLEAR_REMINDER, HIDE_ALERT, REMOVE_ALARM, REMOVE_REMINDER, SHOW_ALERT} from '../types'
+import {ADD_ALARM, ADD_REMINDER, CLEAR_REMINDER, DEAD_ALARM, HIDE_ALERT, REMOVE_ALARM, REMOVE_REMINDER, SHOW_ALERT} from '../types'
 import { bake_cookie, read_cookie } from 'sfcookies'
 import { v4 as uuidv4 } from 'uuid';
 
 const initState = {
     reminders: read_cookie('reminders'),
     alertModel: false,
-    alarm: ''
+    alarm: '',
+    dAlarm: true,
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -37,7 +38,10 @@ export default (state = initState, action) => {
 
         case REMOVE_ALARM:
             return {...state, alarm: ''}
-        
+
+        case DEAD_ALARM:
+            return {...state, dAlarm:false}
+
         default:
             return state
     }
