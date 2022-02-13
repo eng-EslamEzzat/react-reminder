@@ -28,7 +28,7 @@ export default (state = initState, action) => {
             return { ...state, reminders:[] }
 
         case SHOW_ALERT:
-            return {...state, alertModel:true}
+            return {...state, alertModel:true, dAlarm:true}
 
         case HIDE_ALERT:
             return {...state, alertModel:false}
