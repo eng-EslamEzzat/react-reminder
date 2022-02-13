@@ -10,13 +10,6 @@ const ReminderForm = (props) => {
     const [text, setText] = useState('');
     const [date, setDate] = useState(new Date())
 
-    const updateDate = () => {
-        const updatedDate = new Date()
-        setDate(updatedDate)
-      }
-    
-    setInterval(updateDate, 60000);
-
     let unique = true
     const formHandling = () => {
         unique = true

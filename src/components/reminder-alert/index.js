@@ -8,14 +8,14 @@ const ReminderAlert = (props) => {
     audio.loop = true;
 
     const {show, hideAlert, alarm, removeAlarm} = props;
-    alarm&& audio.play();
+    show&& audio.play();
     
     return (
         <Modal show={show} onHide={() => {hideAlert(); alarm&&removeAlarm(); audio.pause()}}>
             <Modal.Header closeButton>
-            <Modal.Title>{alarm? "Alarm...": "Warning..."}</Modal.Title>
+            <Modal.Title>{show? "Alarm...": "Warning..."}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{alarm? alarm: "Seems you are already added this!"}</Modal.Body>
+            <Modal.Body>{show? alarm: "Seems you are already added this!"}</Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={() => {hideAlert(); alarm&&removeAlarm(); audio.pause()}}>
                 Close
