@@ -19,7 +19,6 @@ const ReminderItem = (props) => {
     updatedDate.setSeconds(0);
     if((updatedDate.toString() === reminderDate.toString())&&props.dAlarm) {
       props.addAlarm(reminder.text)
-      props.showAlert()
     }
     setDate(moment(new Date(reminder.date)).fromNow())
   }

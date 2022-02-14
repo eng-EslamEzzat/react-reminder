@@ -10,14 +10,40 @@ const ReminderAlert = (props) => {
     const {show, hideAlert, alarm, removeAlarm, dAlarm, deadAlarm} = props;
     (alarm&&dAlarm)&& audio.play();
     
-    return (
-        <Modal show={show&&dAlarm} onHide={() => {hideAlert(); alarm&&removeAlarm(); audio.pause(); deadAlarm()}}>
+    if (show) return (
+        <Modal show={true} onHide={() => hideAlert()}>
             <Modal.Header closeButton>
-            <Modal.Title>{alarm&&dAlarm? "Alarm...": "Warning..."}</Modal.Title>
+            <Modal.Title>{"Warning..."}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{alarm&&dAlarm? alarm: "Seems you are already added this!"}</Modal.Body>
+            <Modal.Body>{"Seems you are already added this!"}</Modal.Body>
             <Modal.Footer>
-            <Button variant="secondary" onClick={() => {hideAlert(); alarm&&removeAlarm(); audio.pause(); deadAlarm()}}>
+            <Button variant="secondary" onClick={() => hideAlert() }>
+                Close
+            </Button>
+            </Modal.Footer>
+        </Modal>
+    )
+    else if (alarm&&dAlarm) return (
+        <Modal show={true} onHide={() => {removeAlarm(); audio.pause(); deadAlarm()}}>
+            <Modal.Header closeButton>
+            <Modal.Title>{"Alarm..."}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{alarm}</Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={() => {removeAlarm(); audio.pause(); deadAlarm()}}>
+                Close
+            </Button>
+            </Modal.Footer>
+        </Modal>
+    )
+    else return(
+        <Modal show={false}>
+            <Modal.Header closeButton>
+            <Modal.Title>{(alarm&&dAlarm)? "Alarm...": "Warning..."}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{(alarm&&dAlarm)? alarm: "Seems you are already added this!"}</Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary">
                 Close
             </Button>
             </Modal.Footer>
